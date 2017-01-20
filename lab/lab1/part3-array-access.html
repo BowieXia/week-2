@@ -73,9 +73,30 @@
 
     Start code
 
-    ===================== */
 
-    L.marker([0, 0]).addTo(map);
+    ===================== */
+    var restaurantData = [
+    [39.946273,
+    -75.145446,
+    "Zahav"],
+    [39.949689,
+    -75.153295,
+    "Morimoto"],
+    [40.733212,
+    -74.003358,
+    "Hakata Tonton"]
+    ]
+
+    for (var i = 0; i < 3; i++) {
+      L.marker([restaurantData[i][0], restaurantData[i][1]]).bindPopup(restaurantData[i][2]).openPopup().addTo(map);
+    }
+
+    restaurantData.push([39.954813,-75.193991,"Sang Kee"],[39.956764,-75.197014,"Han Dynasty"]);
+
+    for (var i = 3; i < 5; i++) {
+      L.marker([restaurantData[i][0], restaurantData[i][1]]).bindPopup(restaurantData[i][2]).openPopup().addTo(map);
+    }
+
     L.marker([0, 0]).addTo(map);
     L.marker([0, 0]).addTo(map);
 
