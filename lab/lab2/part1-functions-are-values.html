@@ -66,8 +66,20 @@
       //  works! You should see 'Success: true' if all goes well.
 
       /* Define your function here */
+      function AddValue (theArray){
+        if (typeof theArray === 'string') {
+          yourSum = yourSum + theArray.length;
+        }
+        else if (typeof theArray === 'number') {
+          yourSum = yourSum + theArray;
+        }
+      }
 
-      for (var i = 0; i < theArray.length, i++) { /* Inside the loop*/ }
+      for (var i = 0; i < theArray.length; i++)
+      { /* Inside the loop*/
+        AddValue(theArray[i]);
+      }
+      console.log(yourSum);
 
       /* =====================
 
