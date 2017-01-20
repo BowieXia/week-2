@@ -32,7 +32,28 @@
 
     ===================== */
 
+    // Problem one
+    var sum = 0;
+    for (var i = 1; i < 1000; i++) {
+      if (i%3==0) {
+        sum = sum + i;
+      }
+      else if (i%5==0&&i%3!=0) {
+        sum = sum + i;
+      }
+    }
+    console.log(sum);
 
+    //Problem two
+    var Fn = [1,2];
+    var SumFn = 0;
+    for (var i = 1; Fn[i] < 4000000 ; i++) {
+      Fn.push(Fn[i]+Fn[i-1]);
+      if (Fn[i]%2==0) {
+        SumFn = SumFn + Fn[i];
+      }
+    }
+    console.log(SumFn);
 
     /* =====================
 
