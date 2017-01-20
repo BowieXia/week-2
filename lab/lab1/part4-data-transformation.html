@@ -64,14 +64,19 @@
     ===================== */
 
     var data = bikeArrayClean;
+    var data_D = bikeArrayDirty;
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
-
-
+    var dataFiltered = [];
+    for (var i = 0; i < data.length; i++) {
+      if (data[i][3]>20) {
+        dataFiltered.push(data[i]);
+      }
+    }
 
     /* =====================
 
@@ -97,8 +102,23 @@
     Start code to add markers to map
 
     ===================== */
+    for (var i = 0; i < dataFiltered.length; i++) {
+      L.marker([dataFiltered[i][1], dataFiltered[i][0]]).bindPopup(dataFiltered[i][2]).openPopup().addTo(map);
+    }
 
+    //Work with dirty data, since I used a for loop to filter the clean data.
+    // But in dirty data, there is no rack info, so the filter doesn't work for dirty data
+    var dataFiltered_Dirty = [];
+    for (var i = 0; i < data_D.length; i++) {
+      if (data[i][3]>20) {
+        dataFiltered_Dirty.push(data_D[i]);
+      }
+    }
+    for (var i = 0; i < dataFiltered_Dirty.length; i++) {
+      L.marker([dataFiltered_Dirty[i][1], dataFiltered_Dirty[i][0]]).bindPopup(dataFiltered_Dirty[i][2]).openPopup().addTo(map);
+    }
 
+    //In the end, the dirty data and clean data will all be displayed in the map
 
     /* =====================
 
