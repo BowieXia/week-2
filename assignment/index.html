@@ -29,6 +29,12 @@
       	maxZoom: 20,
       	ext: 'png'
       }).addTo(map);
+      var myIcon = L.icon({
+        iconUrl: 'Tooth.png',
+        iconSize: [48,48],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
+      });
     </script>
     <script>
       /* =====================
@@ -48,6 +54,31 @@
        Remember: functions are meant to facilitate code comprehension and reuse. Try to use them to organize your code.
       ===================== */
 
+      /* =====================
+
+      Useless code
+      var Array_LNG = [];
+      var Array_LAT = [];
+      var Array_OBJECTID = [];
+      var Array_NAME = [];
+      var Array_ORGANIZATION = [];
+      var Array_ZIP = [];
+      var Array_PHONE = [];
+      var Array_WEBSITE = [];
+      var Array_DENTAL_PHONE = [];
+      var Array_FULL_ADDRESS = [];
+
+      Array_LNG[i] = json[i].LNG
+      Array_LAT[i] = json[i].LAT
+      Array_OBJECTID[i] = json[i].OBJECTID
+      Array_NAME[i] = json[i].NAME
+      Array_ORGANIZATION[i] = json[i].ORGANIZATION
+      Array_ZIP[i] = json[i].ZIP
+      Array_PHONE[i] = json[i].PHONE
+      Array_WEBSITE[i] = json[i].WEBSITE
+      Array_DENTAL_PHONE[i] = json[i].DENTAL_PHONE
+      Array_FULL_ADDRESS[i] = json[i].FULL_ADDRESS
+
 
       /* =====================
 
@@ -55,10 +86,36 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      console.log(healthCenters[0].NAME);
 
 
-      var addMarkers = function(map) {};
+      var jsonToCsv = function(json)
+      {
+        console.log("["
+        ,"LNG","LAT","OBJECTID","NAME","ORGANIZATION","ZIP","PHONE","WEBSITE","DENTAL_PHONE","FULL_ADDRESS","]");
+        for (var i = 0; i < json.length; i++) {
+          console.log("[",json[i].LNG,
+            json[i].LAT,
+            json[i].OBJECTID,
+            json[i].NAME,
+            json[i].ORGANIZATION,
+            json[i].ZIP,
+            json[i].PHONE,
+            json[i].WEBSITE,
+            json[i].DENTAL_PHONE,
+            json[i].FULL_ADDRESS,"]");
+        }
+      };
+
+      var addMarkers = function(map,json) {
+        for (var i = 0; i < json.length; i++) {
+          if (json[i].DENTAL_PHONE != "N/A") {
+            L.marker([json[i].LAT, json[i].LNG], {icon: myIcon}).bindPopup(json[i].NAME).openPopup().addTo(map);
+          }else {
+            L.marker([json[i].LAT, json[i].LNG]).bindPopup(json[i].NAME).openPopup().addTo(map);
+          }
+        }
+      };
 
       /* =====================
 
@@ -68,7 +125,7 @@
 
 
       jsonToCsv(healthCenters);
-      addMarkers(map);
+      addMarkers(map,healthCenters);
     </script>
     <!--Your code ends here-->
   </body>
